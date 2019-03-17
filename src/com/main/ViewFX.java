@@ -77,7 +77,7 @@ public class ViewFX extends Application implements View {
 
         VBox layout = new VBox(new Group(root), new Group(r));
 
-        Scene sc = new Scene(layout, 590, 650);
+        Scene sc = new Scene(layout, 600, 660);
         s.setScene(sc);
         s.show();
 

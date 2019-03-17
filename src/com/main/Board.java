@@ -77,13 +77,17 @@ public class Board {
         //else throw
         String row[] = is_row(place_to_set).split(" ");
        if(Integer.parseInt(row[0]) != Integer.parseInt(row[1])) {
-           if ((Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) >= 4 && Integer.parseInt(row[1]) / _size == Integer.parseInt(row[0]) / _size) {
+           if ((Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) >= 5 && Integer.parseInt(row[1]) / _size == Integer.parseInt(row[0]) / _size) {
                score += (Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) * 10;
                delete_row(Integer.parseInt(row[0]), Integer.parseInt(row[1]));
            }
-           if ((Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) >= 4 && Integer.parseInt(row[1]) % _size == Integer.parseInt(row[0]) % _size) {
-               score += (Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) * 10;
-               delete_row(Integer.parseInt(row[0]), Integer.parseInt(row[1]));
+           int one = Integer.parseInt(row[1])/_size;
+           int two = Integer.parseInt(row[0])/_size;
+           if (one - two  >=  4 ) {
+               if(Integer.parseInt(row[1]) % _size == Integer.parseInt(row[0]) % _size) {
+                   score += (Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) * 10;
+                   delete_row(Integer.parseInt(row[0]), Integer.parseInt(row[1]));
+               }
            }
        }
         return true;
