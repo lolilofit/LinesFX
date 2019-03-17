@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 
-import static java.lang.Integer.parseInt;
-import static java.lang.Integer.remainderUnsigned;
+import static java.lang.Integer.*;
 
 
 public class Board {
@@ -14,10 +13,9 @@ public class Board {
     private ArrayList<Integer> field;
     private int colout_num;
     private int _size;
-    private int score;
+    private Integer score = 0;
 
     public Board() throws IOException {
-        score = 0;
         Properties property = new Properties();
         property.load(getClass().getResourceAsStream("resources/settings.properties"));
         Properties property_class = new Properties();
@@ -34,8 +32,8 @@ public class Board {
     public ArrayList<Integer> getField() {
         return field;
     }
-    public int getSize() {
-        return _size;
+    public Integer get_score() {
+        return score;
     }
 
     private boolean is_path(int start, int dest, int[] was_here) {
@@ -78,10 +76,16 @@ public class Board {
         }
         //else throw
         String row[] = is_row(place_to_set).split(" ");
-        if(Integer.parseInt(row[0]) != Integer.parseInt(row[1]) && (Integer.parseInt(row[0]) - Integer.parseInt(row[1])) >= 3) {
-
-            delete_row(Integer.parseInt(row[0]), Integer.parseInt(row[1]));
-        }
+       if(Integer.parseInt(row[0]) != Integer.parseInt(row[1])) {
+           if ((Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) >= 4 && Integer.parseInt(row[1]) / _size == Integer.parseInt(row[0]) / _size) {
+               score += (Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) * 10;
+               delete_row(Integer.parseInt(row[0]), Integer.parseInt(row[1]));
+           }
+           if ((Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) >= 4 && Integer.parseInt(row[1]) % _size == Integer.parseInt(row[0]) % _size) {
+               score += (Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) * 10;
+               delete_row(Integer.parseInt(row[0]), Integer.parseInt(row[1]));
+           }
+       }
         return true;
     }
 
@@ -93,7 +97,7 @@ public class Board {
             }
         }
         else {
-            while(first != second) {
+            while(first != second + 1) {
                 field.set(first, 0);
                 first ++;
             }
@@ -141,7 +145,7 @@ public class Board {
             else
                 break;
         }
-        while((down-_size)/_size >= 0) {
+        while((down-_size) >= 0) {
             if(field.get(down-_size) == field.get(place))
                 down -= _size;
             else

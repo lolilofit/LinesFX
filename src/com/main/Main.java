@@ -8,6 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         Thread view_thread = new Thread(new Runnable() {
             public void run() {
                     ArrayList<Integer> f = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Main {
                 Game game = null;
                 try {
                     game = Game.getInstance(view);
-                    game.menu();
+                    game.game();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
