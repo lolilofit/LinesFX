@@ -1,13 +1,20 @@
 package com.main;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 
 public class Main {
-    private static ViewFX view = new ViewFX();
+    //private static ViewFX view;
+    private static View view;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+        Properties property = new Properties();
+        property.load(Main.class.getResourceAsStream("resources/settings.properties"));
+        Properties property_class = new Properties();
+        property_class.load(Main.class.getResourceAsStream("resources/classes.properties"));
+        view = Factory.getInstance().create_op_view(property_class.getProperty(property.getProperty("output_type")));
 
         Thread view_thread = new Thread(new Runnable() {
             public void run() {
@@ -20,9 +27,6 @@ public class Main {
                     view.show_menu();
             }
         });
-
-//        view_thread.setDaemon(true);
-
 
         view_thread.start();
 

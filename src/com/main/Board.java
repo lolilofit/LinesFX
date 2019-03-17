@@ -137,13 +137,13 @@ public class Board {
     private String is_row(int place) {
 
         int up = place, down = place, right = place, left = place;
-        while((left-1)%_size >= 0) {
+        while((left)%_size - 1 >= 0) {
             if(field.get(left-1) == field.get(place))
                 left--;
             else
                 break;
         }
-        while((right+1)%_size < _size) {
+        while((right)%_size +  1 < _size) {
             if(field.get(right+1) == field.get(place))
                 right++;
             else

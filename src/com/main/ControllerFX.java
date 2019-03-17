@@ -27,15 +27,6 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
         button_text = "";
         number = _number;
         _view = view;
-
-/*
-        for(Integer i=0; i< colour_num; i++) {
-            Image image = new Image(getClass().getResourceAsStream("png_files/" + i.toString() + ".png"));
-            balls.put(i, image);
-        }
-        
-      //  Image image = new Image(getClass().getResourceAsStream("png_files/" + button_text + ".png"));
-*/
     }
 
 

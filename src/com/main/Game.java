@@ -9,21 +9,17 @@ public class Game {
     private static volatile Game instance;
     private String controller_message;
 
-    private Game(ViewFX _view) throws  IOException{
+    private Game(View _view) throws  IOException{
 
         Properties property = new Properties();
         property.load(getClass().getResourceAsStream("resources/settings.properties"));
-    //    Properties property_class = new Properties();
-     //    property_class.load(getClass().getResourceAsStream("resources/classes.properties"));
+
         int size = Integer.parseInt(property.getProperty("field_size"));
         game_field = new Board();
-        //view = Factory.getInstance().create_op_view(property_class.getProperty(property.getProperty("output_type")));
-
-
         view = _view;
-    }
+  }
 
-    public static Game getInstance(ViewFX _view) throws IOException {
+    public static Game getInstance(View _view) throws IOException {
 
         if (instance == null) {
             synchronized (Factory.class) {
@@ -42,8 +38,6 @@ public class Game {
     public void game() {
         view.show_current_field(game_field.getField());
         view.show_game_stat(game_field.get_score());
-
-        ControllerFX _control = new ControllerFX(82);
 
         boolean was_set = true;
         view.show_game_stat(game_field.get_score());
@@ -81,7 +75,7 @@ public class Game {
 
             view.show_game_stat(game_field.get_score());
         }
-        _control = null;
+
     }
 
 }

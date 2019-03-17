@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class ViewFX extends Application implements View {
 
@@ -27,9 +28,16 @@ public class ViewFX extends Application implements View {
 
  public ViewFX() {
 
-     colour_num = 4;
-     //считать с настроек
-     size = 9;
+        try {
+            Properties property = new Properties();
+            property.load(getClass().getResourceAsStream("resources/settings.properties"));
+            size = Integer.parseInt(property.getProperty("field_size"));
+            colour_num = Integer.parseInt(property.getProperty("colour_num"));
+     } catch (IOException e) {
+         e.printStackTrace();
+         Platform.exit();
+         System.exit(1);
+     }
 
      obs_list = new ArrayList<>(size*size);
 
