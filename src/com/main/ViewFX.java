@@ -11,6 +11,8 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -84,6 +86,8 @@ public class ViewFX extends Application implements View {
           r.add(score_button,1, 0, size, 1);
 
         VBox layout = new VBox(new Group(root), new Group(r));
+
+       // layout.setStyle("-fx-background-color: #FDF5E6");
 
         Scene sc = new Scene(layout, 600, 660);
         s.setScene(sc);

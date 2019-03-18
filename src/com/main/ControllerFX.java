@@ -45,7 +45,7 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
 
                     Platform.runLater(() -> {
                         try {
-                            Thread.sleep(800);
+                            Thread.sleep(50);
                             ArrayList<Integer> field = _view.get_updated_field();
                             for (int i = 0; i < button_list.size(); i++) {
                                 //button_list.get(i).setText(field.get(i).toString());
