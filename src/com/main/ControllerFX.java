@@ -5,14 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ControllerFX extends Button implements ControlInterface, ButtonFactory {
 
-    private static Integer last_pressed = 0, prev_pos = -1, begin, end;
+    private static Integer last_pressed = 0, prev_pos = -1, begin = 0, end = 0;
     private String button_text;
     public int number;
     private ViewFX _view;
@@ -38,8 +36,7 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
                     this.button_text = "0";
                 }
                 else if (prev_pos != -1 && (Integer.parseInt(button_text) == 0)) {
-                   // game_message = prev_pos.toString() + " " + last_pressed.toString();
-                    end = number;
+                     end = number;
                      prev_pos = -1;
 
 
@@ -65,7 +62,7 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
                     });
 
                     synchronized (Game.getInstance(_view)) {
-                        Game.getInstance(_view).setMessage(begin.toString() + " " + end.toString());
+                         get_message();
                         (Game.getInstance(_view)).notifyAll();
                     }
 
@@ -76,7 +73,6 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
 
        ArrayList<Integer> field = _view.get_updated_field();
        button_text = field.get(number).toString();
-   //    this.setText(button_text);
 
            Image image = new Image(getClass().getResourceAsStream("circles_png/" + button_text + ".png"));
            ImageView imageView = new ImageView(image);
@@ -97,8 +93,12 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
         return this;
     }
 
-    public String get_message() {
-        return prev_pos.toString() + " " + last_pressed.toString();
+    public void get_message() {
+        try {
+            Game.getInstance(_view).setMessage(begin.toString() + " " + end.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

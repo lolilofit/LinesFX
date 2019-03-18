@@ -1,24 +1,43 @@
 package com.main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class ConsoleController implements ControlInterface{
-    Game game_game;
 
-    public ConsoleController(int size) {
+    private ConsoleView view;
 
+    public ConsoleController(ConsoleView _view) {
+        view = _view;
     }
 
-    public void changes(int pos, int value) {}
-    public String get_message() {
+    public void get_message() {
         Scanner in = new Scanner(System.in); //wait
         String operation = new String();
-        while((operation= in.nextLine()).equals("")) {}
-        return operation;
-    //    game_game.current_in = operation;
+
+        try {
+            synchronized (Game.getInstance(view)) {
+                (Game.getInstance(view)).notifyAll();
+            }
+
+            while (true) {
+                if ((operation = in.nextLine()).equals("") == false) {
+                    synchronized (Game.getInstance(view)) {
+                        Game.getInstance(view).setMessage(operation);
+                        (Game.getInstance(view)).notifyAll();
+                    }
+                }
+            }
+          }catch (Exception e) {
+             e.printStackTrace();
+         }
+        }
     }
 
-}
+
 
 
 

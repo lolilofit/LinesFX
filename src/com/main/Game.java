@@ -36,19 +36,28 @@ public class Game {
     }
 
     public void game() {
+        game_field.computer_turn();
         view.show_current_field(game_field.getField());
         view.show_game_stat(game_field.get_score());
 
         boolean was_set = true;
         view.show_game_stat(game_field.get_score());
         try {
-            synchronized (Game.getInstance((ViewFX) view)) {
-                (Game.getInstance((ViewFX) view)).wait();
+            synchronized (Game.getInstance(view)) {
+                (Game.getInstance(view)).wait();
             }
             String n = controller_message;
-            String[] mes = n.split(" ");
-            was_set = game_field.player_turn(Integer.parseInt(mes[0]), Integer.parseInt(mes[1]));
-        }
+            if(controller_message == "help") {
+                view.help();
+            }
+            else if(controller_message == "exit") {
+                view.exit();
+            }
+                else {
+                String[] mes = n.split(" ");
+                was_set = game_field.player_turn(Integer.parseInt(mes[0]), Integer.parseInt(mes[1]));
+            }
+         }
         catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,12 +71,18 @@ public class Game {
 
 
                 view.show_current_field(game_field.getField());
-                synchronized (Game.getInstance((ViewFX) view)) {
-                    (Game.getInstance((ViewFX) view)).wait();
-                    }
-                    String n = controller_message;
-                 String[] mes = n.split(" ");
-                 was_set = game_field.player_turn(Integer.parseInt(mes[0]), Integer.parseInt(mes[1]));
+                synchronized (Game.getInstance(view)) {
+                    (Game.getInstance(view)).wait();
+                }
+                String n = controller_message;
+                if (controller_message == "help") {
+                    view.help();
+                } else if (controller_message == "exit") {
+                    view.exit();
+                } else {
+                    String[] mes = n.split(" ");
+                    was_set = game_field.player_turn(Integer.parseInt(mes[0]), Integer.parseInt(mes[1]));
+                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return;

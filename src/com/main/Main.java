@@ -5,7 +5,7 @@ import java.util.Properties;
 
 
 public class Main {
-    //private static ViewFX view;
+
     private static View view;
 
     public static void main(String[] args) throws IOException {
@@ -19,11 +19,11 @@ public class Main {
         Thread view_thread = new Thread(new Runnable() {
             public void run() {
                     ArrayList<Integer> f = new ArrayList<>();
-                    for(int i = 0; i< 80; i++)
+                    for(int i = 0; i< 81; i++)
                         f.add(0);
-                    f.add(1);
+                    //f.add(1);
 
-                    view.show_current_field(f);
+                 //   view.show_current_field(f);
                     view.show_menu();
             }
         });

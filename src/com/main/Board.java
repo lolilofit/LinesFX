@@ -26,7 +26,6 @@ public class Board {
         field = new ArrayList<>();
         for(int i =0; i<_size*_size; i++)
             field.add(0);
-        field.set(0, 1);
     }
 
     public ArrayList<Integer> getField() {
