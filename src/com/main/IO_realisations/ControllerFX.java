@@ -1,5 +1,8 @@
-package com.main;
+package com.main.IO_realisations;
 
+import com.main.ButtonFactory;
+import com.main.ControlInterface;
+import com.main.Game;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -45,10 +48,9 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
                             Thread.sleep(50);
                             ArrayList<Integer> field = _view.get_updated_field();
                             for (int i = 0; i < button_list.size(); i++) {
-                                //button_list.get(i).setText(field.get(i).toString());
                                 button_list.get(i).button_text = field.get(i).toString();
 
-                                Image image  = new Image(getClass().getResourceAsStream( "circles_png/" + field.get(i).toString() + ".png"));
+                                Image image  = new Image(getClass().getResourceAsStream( "../circles_png/" + field.get(i).toString() + ".png"));
                                 ImageView imageView = new ImageView(image);
                                  button_list.get(i).setGraphic(imageView);
                                 image = null;
@@ -58,6 +60,9 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
                         }
                         catch (Exception ex) {
                          ex.printStackTrace();
+                         Platform.exit();
+                         System.exit(2);
+
                         }
                     });
 
@@ -74,7 +79,7 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
        ArrayList<Integer> field = _view.get_updated_field();
        button_text = field.get(number).toString();
 
-           Image image = new Image(getClass().getResourceAsStream("circles_png/" + button_text + ".png"));
+           Image image = new Image(getClass().getResourceAsStream("../circles_png/" + button_text + ".png"));
            ImageView imageView = new ImageView(image);
            this.setStyle("-fx-background-color: 255.255.255.0");
            this.setGraphic(imageView);
@@ -87,6 +92,8 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
                 action(e);
             } catch (IOException e1) {
                 e1.printStackTrace();
+                Platform.exit();
+                System.exit(2);
             }
         });
         button_list.add(number, this);
@@ -97,6 +104,7 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
         try {
             Game.getInstance(_view).setMessage(begin.toString() + " " + end.toString());
         } catch (IOException e) {
+            System.exit(1);
             e.printStackTrace();
         }
     }

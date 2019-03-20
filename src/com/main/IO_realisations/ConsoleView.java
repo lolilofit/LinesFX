@@ -1,6 +1,6 @@
-package com.main;
+package com.main.IO_realisations;
 
-import javafx.application.Platform;
+import com.main.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class ConsoleView implements View {
     public ConsoleView() {
         try {
             Properties property = new Properties();
-            property.load(getClass().getResourceAsStream("resources/settings.properties"));
+            property.load(getClass().getResourceAsStream("../resources/settings.properties"));
             size = Integer.parseInt(property.getProperty("field_size"));
         } catch (IOException e) {
             e.printStackTrace();

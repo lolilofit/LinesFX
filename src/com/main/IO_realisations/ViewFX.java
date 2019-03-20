@@ -1,5 +1,7 @@
-package com.main;
+package com.main.IO_realisations;
 
+import com.main.Game;
+import com.main.View;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,19 +23,19 @@ public class ViewFX extends Application implements View {
 
   private int size;
   private ArrayList<Integer> obs_list = null;
-  private Integer score = 0;
+  private static Integer score = 0;
   private Integer colour_num;
 
  public ViewFX() {
 
         try {
             Properties property = new Properties();
-            property.load(getClass().getResourceAsStream("resources/settings.properties"));
+            property.load(getClass().getResourceAsStream("../resources/settings.properties"));
             size = Integer.parseInt(property.getProperty("field_size"));
             colour_num = Integer.parseInt(property.getProperty("colour_num"));
 
             obs_list = new ArrayList<>(size*size);
-            obs_list = Game.getInstance(this).game_field.getField();
+            obs_list = Game.getInstance(this).return_field();
 
         } catch (IOException e) {
          e.printStackTrace();
@@ -66,13 +68,9 @@ public class ViewFX extends Application implements View {
            }
 
           Button score_button = new Button("Score is: 0");
-           score_button.setOnAction(new EventHandler<ActionEvent>() {
-               @Override
-               public void handle(ActionEvent event) {
-                   score_button.setText("Score is: " + score.toString());
-               }
-           });
-          r.add(score_button,1, 0, size, 1);
+           score_button.setOnAction(event -> score_button.setText("Score is: " + score.toString()));
+
+           r.add(score_button,1, 0, size, 1);
 
         VBox layout = new VBox(new Group(root), new Group(r));
 
@@ -106,6 +104,4 @@ public class ViewFX extends Application implements View {
         Platform.exit();
         System.exit(0);
     }
-
-
 }

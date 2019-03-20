@@ -34,7 +34,7 @@ public class Factory {
         View return_class = null;
         try {
 
-            Class<?> _class = Class.forName("com.main." + name);
+            Class<?> _class = Class.forName("com.main.IO_realisations." + name);
             return_class = (View)_class.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             log.log(Level.SEVERE, "Exception happened: ", e);

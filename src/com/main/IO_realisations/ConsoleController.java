@@ -1,12 +1,11 @@
-package com.main;
+package com.main.IO_realisations;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.main.ControlInterface;
+import com.main.Game;
+
 import java.util.Scanner;
 
-public class ConsoleController implements ControlInterface{
+public class ConsoleController implements ControlInterface {
 
     private ConsoleView view;
 
@@ -15,7 +14,7 @@ public class ConsoleController implements ControlInterface{
     }
 
     public void get_message() {
-        Scanner in = new Scanner(System.in); //wait
+        Scanner in = new Scanner(System.in);
         String operation = new String();
 
         try {
@@ -33,6 +32,7 @@ public class ConsoleController implements ControlInterface{
             }
           }catch (Exception e) {
              e.printStackTrace();
+             return;
          }
         }
     }
