@@ -58,8 +58,7 @@ public class Board {
         }
         if (start / _size + 1 < _size) {
             if ((field.get(start + _size) == 0) && (was_here[start + _size] == 0))
-                if (is_path(start + _size, dest, was_here) == true)
-                    return true;
+                return is_path(start + _size, dest, was_here) == true;
         }
         return false;
 
@@ -74,7 +73,7 @@ public class Board {
             return false;
         }
         //else throw
-        String row[] = is_row(place_to_set).split(" ");
+        String[] row = is_row(place_to_set).split(" ");
         if (Integer.parseInt(row[0]) != Integer.parseInt(row[1])) {
             if ((Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) >= 5 && Integer.parseInt(row[1]) / _size == Integer.parseInt(row[0]) / _size) {
                 score += (Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) * 10;
@@ -94,7 +93,7 @@ public class Board {
 
     private void delete_row(int first, int second) {
         if (first % _size == second % _size) {
-            while (first != second) {
+            while (first != second + ((second / _size) != _size ? _size : 0)) {
                 field.set(first, 0);
                 first += _size;
             }
@@ -163,7 +162,7 @@ public class Board {
                 place_to_set = ran.nextInt(_size * _size);
             }
             field.set(place_to_set, colour_set);
-            String row[] = is_row(place_to_set).split(" ");
+            String[] row = is_row(place_to_set).split(" ");
             if (Integer.parseInt(row[0]) != Integer.parseInt(row[1])) {
                 if ((Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) >= 5 && Integer.parseInt(row[1]) / _size == Integer.parseInt(row[0]) / _size) {
                     score += (Integer.parseInt(row[1]) - Integer.parseInt(row[0]) + 1) * 10;

@@ -81,7 +81,7 @@ public class ControllerFX extends Button implements ControlInterface, ButtonFact
 
            Image image = new Image(getClass().getResourceAsStream("../circles_png/" + button_text + ".png"));
            ImageView imageView = new ImageView(image);
-           this.setStyle("-fx-background-color: 255.255.255.0");
+           this.setStyle("-fx-background-color: Transparent");
            this.setGraphic(imageView);
            image = null;
            imageView = null;

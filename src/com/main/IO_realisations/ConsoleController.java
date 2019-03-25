@@ -15,7 +15,7 @@ public class ConsoleController implements ControlInterface {
 
     public void get_message() {
         Scanner in = new Scanner(System.in);
-        String operation = new String();
+        String operation = "";
 
         try {
             synchronized (Game.getInstance(view)) {

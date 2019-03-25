@@ -12,8 +12,10 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,9 +70,14 @@ public class ViewFX extends Application implements View {
            }
 
           Button score_button = new Button("Score is: 0");
-           score_button.setOnAction(event -> score_button.setText("Score is: " + score.toString()));
+     //   BackgroundFill test = new BackgroundFill(new Paint() {
 
-           r.add(score_button,1, 0, size, 1);
+      //  }, null, null);
+         score_button.setStyle("-fx-background-color: #ba50ff; -fx-animated: fly");
+
+          score_button.setOnAction(event -> score_button.setText("Score is: " + score.toString()));
+
+          r.add(score_button,1, 0, size, 1);
 
         VBox layout = new VBox(new Group(root), new Group(r));
 
